@@ -46,12 +46,13 @@ export default class FoldMenu {
     const parentWidth = this.selector.offsetWidth;
     const foldMenu: HTMLElement = this.selector.querySelector(`.${foldMenuClass}`);
     this.selector.style.overflow = 'hidden';
+    foldMenu.style.display = '';
     this.foldMenuList = [];
     [].forEach.call(childElements, (element: HTMLElement) => {
       element.style.display = '';
     });
     [].forEach.call(childElements, (element: HTMLElement) => {
-      if (getOffset(element).left + element.offsetWidth > parentWidth && !hasClass(element, foldMenuClass)) {
+      if (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth && !hasClass(element, foldMenuClass)) {
         element.style.display = 'none';
         this.foldMenuList.push(element);
       }
