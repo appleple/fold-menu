@@ -1,4 +1,4 @@
-import { getOffset, append, addClass, removeClass, hasClass } from './utility';
+import { getOffset, append, addClass, removeClass, hasClass, after, createElement } from './utility';
 
 type Option = {
   foldMenuClass: string;
@@ -41,7 +41,7 @@ export default class FoldMenu {
   }
   
   calc() {
-    const { foldMenuClass } = this.option;
+    const { foldMenuClass, foldMenuToggleClass, foldMenuText } = this.option;
     const childElements = this.selector.children;
     const parentWidth = this.selector.offsetWidth;
     const foldMenu: HTMLElement = this.selector.querySelector(`.${foldMenuClass}`);
@@ -51,12 +51,23 @@ export default class FoldMenu {
     [].forEach.call(childElements, (element: HTMLElement) => {
       element.style.display = '';
     });
-    [].forEach.call(childElements, (element: HTMLElement) => {
+    let lastIndex = 0;
+    [].forEach.call(childElements, (element: HTMLElement, index) => {
       if (getOffset(element).left + element.offsetWidth > parentWidth && !hasClass(element, foldMenuClass)) {
         element.style.display = 'none';
         this.foldMenuList.push(element);
+        lastIndex = index;
       }
     });
+   
+    if (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth) {
+      const lastElement = childElements[lastIndex + 1] as HTMLElement;
+      if (lastElement) {
+        lastElement.style.display = 'none';
+        this.foldMenuList.push(lastElement);
+      }
+    }
+
     this.selector.style.overflow = '';
     if (!this.foldMenuList.length) {
       foldMenu.style.display = 'none';

@@ -113,3 +113,9 @@ export const getOffset = el => {
     left: rect.left + getScrollLeft()
   }
 }
+
+export const createElement = (html: string): HTMLElement => {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return div.firstElementChild as HTMLElement;
+}
