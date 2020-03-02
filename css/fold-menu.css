@@ -3,30 +3,6 @@
   display: block;
 }
 
-.js-fold-menu-toggle:after {
-  content: "";
-  position: absolute;
-  height: 2px;
-  width: 15px;
-  display: block;
-  transform: rotate(45deg);
-  background-color: #FFF;
-  top: 15px;
-  left: 7px;
-}
-
-.js-fold-menu-toggle:before {
-  content: "";
-  position: absolute;
-  height: 2px;
-  width: 15px;
-  display: block;
-  transform: rotate(-45deg);
-  background-color: #FFF;
-  top: 15px;
-  left: 17px;
-}
-
 .js-fold-menu {
   position: relative;
 }

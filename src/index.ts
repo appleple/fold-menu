@@ -5,13 +5,15 @@ type Option = {
   foldMenuToggleClass: string;
   foldMenuListClass: string;
   foldMenuListActiveClass: string;
+  foldMenuText: string;
 };
 
 const defaultOption = {
   foldMenuClass: 'js-fold-menu',
   foldMenuToggleClass: 'js-fold-menu-toggle',
   foldMenuListClass: 'js-fold-menu-list',
-  foldMenuListActiveClass: 'js-fold-menu-list-active'
+  foldMenuListActiveClass: 'js-fold-menu-list-active',
+  foldMenuText: '...'
 }
 
 export default class FoldMenu {
@@ -92,9 +94,9 @@ export default class FoldMenu {
   }
 
   appendMenu() {
-    const { foldMenuClass, foldMenuToggleClass, foldMenuListClass } = this.option;
+    const { foldMenuClass, foldMenuToggleClass, foldMenuListClass, foldMenuText } = this.option;
     append(this.selector, `<li class="${foldMenuClass}">
-      <a href="#" class="${foldMenuToggleClass}"></a>
+      <a href="#" class="${foldMenuToggleClass}">${foldMenuText}</a>
       <ul class="${foldMenuListClass}"></ul>
     </li>`);
   }
