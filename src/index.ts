@@ -21,9 +21,9 @@ export default class FoldMenu {
 
   constructor(selector: string | HTMLElement, option: Partial<Option> = {}) {
     this.selector = typeof selector === 'string' ? document.querySelector(selector) : selector;
-    this.option = { ...defaultOption, ...option }
-    this.calc();
+    this.option = { ...defaultOption, ...option };
     this.appendMenu();
+    this.calc();
     this.buildToggleHtml();
     this.registerToggleEvent();
     this.observe();
@@ -40,9 +40,10 @@ export default class FoldMenu {
   
   calc() {
     const { foldMenuClass } = this.option;
-    this.selector.style.overflow = 'hidden';
     const childElements = this.selector.children;
     const parentWidth = this.selector.offsetWidth;
+    const foldMenu: HTMLElement = this.selector.querySelector(`.${foldMenuClass}`);
+    this.selector.style.overflow = 'hidden';
     this.foldMenuList = [];
     [].forEach.call(childElements, (element: HTMLElement) => {
       element.style.display = '';
@@ -54,6 +55,11 @@ export default class FoldMenu {
       }
     });
     this.selector.style.overflow = '';
+    if (!this.foldMenuList.length) {
+      foldMenu.style.display = 'none';
+    } else {
+      foldMenu.style.display = '';
+    }
   }
 
   buildToggleHtml() {
