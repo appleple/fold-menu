@@ -52,7 +52,7 @@ export default class FoldMenu {
       element.style.display = '';
     });
     [].forEach.call(childElements, (element: HTMLElement) => {
-      if (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth && !hasClass(element, foldMenuClass)) {
+      if (getOffset(element).left + element.offsetWidth > parentWidth && !hasClass(element, foldMenuClass)) {
         element.style.display = 'none';
         this.foldMenuList.push(element);
       }
