@@ -1,17 +1,18 @@
-import { getOffset, append } from './utility';
+import { getOffset, append, addClass, removeClass, hasClass } from './utility';
 
 type Option = {
   foldMenuClass: string;
   foldMenuToggleClass: string;
   foldMenuListClass: string;
+  foldMenuListActiveClass: string;
 };
 
 const defaultOption = {
   foldMenuClass: 'js-fold-menu',
   foldMenuToggleClass: 'js-fold-menu-toggle',
   foldMenuListClass: 'js-fold-menu-list',
+  foldMenuListActiveClass: 'js-fold-menu-list-active'
 }
-
 
 export default class FoldMenu {
   selector: HTMLElement;
@@ -24,26 +25,65 @@ export default class FoldMenu {
     this.calc();
     this.appendMenu();
     this.buildToggleHtml();
+    this.registerToggleEvent();
+    this.observe();
+  }
+
+  observe() {
+    // @ts-ignore
+    const resizeObserver = new ResizeObserver(() => {
+      this.calc();
+      this.buildToggleHtml();
+    });
+    resizeObserver.observe(this.selector);
   }
   
   calc() {
+    const { foldMenuToggleClass } = this.option;
+    this.selector.style.overflow = 'hidden';
     const childElements = this.selector.children;
     const parentWidth = this.selector.offsetWidth;
+    this.foldMenuList = [];
     [].forEach.call(childElements, (element: HTMLElement) => {
-      if (getOffset(element).left + element.offsetWidth > parentWidth) {
+      element.style.display = '';
+    });
+    [].forEach.call(childElements, (element: HTMLElement) => {
+      if (getOffset(element).left + element.offsetWidth > parentWidth && !hasClass(element, foldMenuToggleClass)) {
+        console.log(element);
         element.style.display = 'none';
         this.foldMenuList.push(element);
       }
     });
+    this.selector.style.overflow = '';
   }
 
   buildToggleHtml() {
-    const { foldMenuClass, foldMenuToggleClass, foldMenuListClass } = this.option;
-    const ul = this.selector.querySelector(`.${foldMenuListClass}`);
+    const { foldMenuListClass } = this.option;
+    const ul: HTMLElement = this.selector.querySelector(`.${foldMenuListClass}`);
     const listHTML = [].map.call(this.foldMenuList, (child: HTMLElement) => {
       return `<li>${child.innerHTML}</li>`;
     }).join('');
     ul.innerHTML = listHTML;
+    ul.style.display = 'none';
+  }
+
+  registerToggleEvent() {
+    const { foldMenuToggleClass, foldMenuListClass, foldMenuListActiveClass } = this.option;
+    const toggle = this.selector.querySelector(`.${foldMenuToggleClass}`);
+    const list: HTMLElement = this.selector.querySelector(`.${foldMenuListClass}`);
+    toggle.addEventListener('click', () => {
+      if (list.style.display === 'none') {
+        list.style.display = '';
+        requestAnimationFrame(() => {
+          addClass(list, foldMenuListActiveClass);
+        });
+      } else {
+        removeClass(list, foldMenuListActiveClass);
+        setTimeout(() => {
+          list.style.display = 'none';
+        }, 300);
+      }
+    });
   }
 
   appendMenu() {
