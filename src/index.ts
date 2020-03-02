@@ -39,7 +39,7 @@ export default class FoldMenu {
   }
   
   calc() {
-    const { foldMenuToggleClass } = this.option;
+    const { foldMenuClass } = this.option;
     this.selector.style.overflow = 'hidden';
     const childElements = this.selector.children;
     const parentWidth = this.selector.offsetWidth;
@@ -48,8 +48,7 @@ export default class FoldMenu {
       element.style.display = '';
     });
     [].forEach.call(childElements, (element: HTMLElement) => {
-      if (getOffset(element).left + element.offsetWidth > parentWidth && !hasClass(element, foldMenuToggleClass)) {
-        console.log(element);
+      if (getOffset(element).left + element.offsetWidth > parentWidth && !hasClass(element, foldMenuClass)) {
         element.style.display = 'none';
         this.foldMenuList.push(element);
       }
