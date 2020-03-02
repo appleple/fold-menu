@@ -1,0 +1,34 @@
+{
+  "name": "fold-menu",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "type": "lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "sass": "node-sass ./scss/multi-level-menu.scss ./css/multi-level-menu.css --output-style expanded",
+    "build": "webpack --config webpack.prod.js",
+    "build:lib": "rm -rf ./lib && tsc",
+    "deploy": "npm run build && npm run build:lib && np --no-cleanup --no-tests",
+    "cp": "./bundle/multi-menu.js ./docs/multi-menu.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "html-minifier": "^3.5.21",
+    "jest": "^23.6.0",
+    "jest-puppeteer": "^3.7.0",
+    "node-sass": "^4.13.1",
+    "np": "^3.1.0",
+    "npm-run-all": "^4.1.5",
+    "puppeteer": "^1.11.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.5"
+  }
+}

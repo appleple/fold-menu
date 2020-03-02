@@ -1,0 +1,44 @@
+.js-fold-menu-toggle {
+  position: relative;
+  display: block;
+}
+
+.js-fold-menu-toggle:after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 15px;
+  display: block;
+  transform: rotate(45deg);
+  background-color: #FFF;
+  top: 15px;
+  left: 7px;
+}
+
+.js-fold-menu-toggle:before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 15px;
+  display: block;
+  transform: rotate(-45deg);
+  background-color: #FFF;
+  top: 15px;
+  left: 17px;
+}
+
+.js-fold-menu {
+  position: relative;
+}
+
+.js-fold-menu-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.js-fold-menu .js-fold-menu-list li {
+  display: block;
+}
