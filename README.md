@@ -1,6 +1,6 @@
 # FoldMenu.js
 
-![./fold-menu.gif]()
+![screenshot](./fold-menu.gif)
 
 ## Installation
 
