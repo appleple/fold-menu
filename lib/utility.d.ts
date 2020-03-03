@@ -18,3 +18,4 @@ export declare const getOffset: (el: any) => {
     top: any;
     left: any;
 };
+export declare const createElement: (html: string) => HTMLElement;
