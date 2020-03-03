@@ -1,13 +1,29 @@
-.js-fold-menu-toggle {
-  position: relative;
+.js-foldmenu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333333;
+  white-space: nowrap;
+}
+
+.js-foldmenu li {
+  display: inline-block;
+}
+
+.js-foldmenu li a {
   display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
 }
 
-.js-fold-menu {
-  position: relative;
+.js-foldmenu a:hover {
+  background-color: #111111;
 }
 
-.js-fold-menu-list {
+.js-foldmenu ul {
+  background-color: #333333;
   position: absolute;
   z-index: 1;
   top: 52px;
@@ -15,17 +31,16 @@
   list-style-type: none;
   padding-left: 0;
   display: none;
-  transition: opacity .3s ease-in;
 }
 
-.js-fold-menu-list-active {
-  opacity: 1;
+.js-foldmenu li {
+  position: relative;
 }
 
-.js-fold-menu .js-fold-menu-list li {
+.js-foldmenu li:hover ul {
   display: block;
 }
 
-.js-fold-menu:hover .js-fold-menu-list {
+.js-foldmenu ul li {
   display: block;
 }
