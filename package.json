@@ -1,6 +1,6 @@
 {
   "name": "fold-menu",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "hide items when they overflow from the menu",
   "main": "lib/index.js",
   "type": "lib/index.d.ts",
