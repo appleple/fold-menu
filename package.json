@@ -1,7 +1,7 @@
 {
   "name": "fold-menu",
   "version": "0.0.1",
-  "description": "",
+  "description": "hide items when they overflow from the menu",
   "main": "lib/index.js",
   "type": "lib/index.d.ts",
   "scripts": {
@@ -15,7 +15,11 @@
   },
   "keywords": [],
   "author": "appleple",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appleple/fold-menu/"
+  },
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
     "html-minifier": "^3.5.21",
