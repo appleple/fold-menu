@@ -60,12 +60,13 @@ export default class FoldMenu {
       }
     });
    
-    if (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth) {
-      const lastElement = childElements[lastIndex + 1] as HTMLElement;
+    while (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth) {
+      const lastElement = childElements[lastIndex] as HTMLElement;
       if (lastElement) {
         lastElement.style.display = 'none';
         this.foldMenuList.push(lastElement);
       }
+      lastIndex--;
     }
 
     this.selector.style.overflow = '';
