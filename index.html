@@ -17,7 +17,16 @@
     <div class="container">
 		<ul class="menu js-foldmenu">
 			<li><a href="#">テスト1</a></li>
-			<li><a href="#">テスト2</a></li>
+			<li>
+				<a href="#">テスト2</a>
+				<ul>
+					<li><a href="#">テスト2 sub item</a></li>
+					<li><a href="#">テスト2 sub item</a></li>
+					<li><a href="#">テスト2 sub item</a></li>
+					<li><a href="#">テスト2 sub item</a></li>
+					<li><a href="#">テスト2 sub item</a></li>
+				</ul>
+			</li>
 			<li><a href="#">テスト3</a></li>
 			<li><a href="#">テスト4</a></li>
 			<li><a href="#">テスト5</a></li>
@@ -103,9 +112,27 @@
 		background-color: #111111;
 	}
 
-	.js-fold-menu-list {
-		position: absolute;
+	.menu ul {
 		background-color: #333333;
+		position: absolute;
+		z-index: 1;
+		top: 52px;
+		left: 0;
+		list-style-type: none;
+		padding-left: 0;
+		display: none;
+	}
+
+	.menu li {
+		position: relative;
+	}
+
+	.menu li:hover ul {
+		display: block;
+	}
+
+	.menu ul li {
+		display: block;
 	}
 
 
