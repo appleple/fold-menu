@@ -6,6 +6,7 @@ type Option = {
   foldMenuListClass: string;
   foldMenuListActiveClass: string;
   foldMenuText: string;
+  addToggleBtn: boolean;
 };
 
 const defaultOption = {
@@ -13,7 +14,8 @@ const defaultOption = {
   foldMenuToggleClass: 'js-fold-menu-toggle',
   foldMenuListClass: 'js-fold-menu-list',
   foldMenuListActiveClass: 'js-fold-menu-list-active',
-  foldMenuText: '...'
+  foldMenuText: '...',
+  addToggleBtn: false
 }
 
 export default class FoldMenu {
@@ -54,7 +56,8 @@ export default class FoldMenu {
 
     let lastIndex = childElements.length;
    
-    while (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth) {
+    while (getOffset(foldMenu).left + foldMenu.offsetWidth > getOffset(this.selector).left + parentWidth) {
+      console.log()
       const lastElement = childElements[lastIndex - 1] as HTMLElement;
       if (lastElement && !hasClass(lastElement, foldMenuClass)) {
         lastElement.style.display = 'none';
@@ -73,17 +76,22 @@ export default class FoldMenu {
   }
 
   buildToggleHtml() {
-    const { foldMenuListClass } = this.option;
+    const { foldMenuListClass, addToggleBtn } = this.option;
     const ul: HTMLElement = this.selector.querySelector(`.${foldMenuListClass}`);
     const listHTML = [].map.call(this.foldMenuList, (child: HTMLElement) => {
       return `<li>${child.innerHTML}</li>`;
     }).join('');
     ul.innerHTML = listHTML;
-    ul.style.display = 'none';
+    if (addToggleBtn) {
+      ul.style.display = 'none';
+    }
   }
 
   registerToggleEvent() {
-    const { foldMenuToggleClass, foldMenuListClass, foldMenuListActiveClass } = this.option;
+    const { foldMenuToggleClass, foldMenuListClass, foldMenuListActiveClass, addToggleBtn } = this.option;
+    if (!addToggleBtn) {
+      return;
+    }
     const toggle = this.selector.querySelector(`.${foldMenuToggleClass}`);
     const list: HTMLElement = this.selector.querySelector(`.${foldMenuListClass}`);
     toggle.addEventListener('click', () => {
@@ -102,7 +110,7 @@ export default class FoldMenu {
   }
 
   appendMenu() {
-    const { foldMenuClass, foldMenuToggleClass, foldMenuListClass, foldMenuText } = this.option;
+    const { foldMenuClass, foldMenuToggleClass, foldMenuListClass, foldMenuText, addToggleBtn } = this.option;
     append(this.selector, `<li class="${foldMenuClass}">
       <a href="#" class="${foldMenuToggleClass}">${foldMenuText}</a>
       <ul class="${foldMenuListClass}"></ul>

@@ -10,11 +10,11 @@
 .js-fold-menu-list {
   position: absolute;
   z-index: 1;
-  top: 40px;
+  top: 52px;
   left: 0;
   list-style-type: none;
   padding-left: 0;
-  opacity: 0;
+  display: none;
   transition: opacity .3s ease-in;
 }
 
@@ -26,3 +26,6 @@
   display: block;
 }
 
+.js-fold-menu:hover .js-fold-menu-list {
+  display: block;
+}
