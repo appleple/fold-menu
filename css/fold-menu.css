@@ -27,10 +27,15 @@
   position: absolute;
   z-index: 1;
   top: 52px;
-  right: 0;
+  left: 0;
   list-style-type: none;
   padding-left: 0;
   display: none;
+}
+
+.js-foldmenu .js-fold-menu-list {
+  left: auto;
+  right: 0;
 }
 
 .js-foldmenu li {
