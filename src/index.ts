@@ -60,14 +60,15 @@ export default class FoldMenu {
       }
     });
    
-    while (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth) {
-      const lastElement = childElements[lastIndex] as HTMLElement;
-      if (lastElement) {
-        lastElement.style.display = 'none';
-        this.foldMenuList.push(lastElement);
-      }
-      lastIndex--;
-    }
+    // while (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth) {
+    //   const lastElement = childElements[lastIndex - 1] as HTMLElement;
+    //   console.log(lastElement);
+    //   if (lastElement) {
+    //     lastElement.style.display = 'none';
+    //     this.foldMenuList.push(lastElement);
+    //   }
+    //   lastIndex--;
+    // }
 
     this.selector.style.overflow = '';
     if (!this.foldMenuList.length) {
