@@ -1,4 +1,5 @@
-import { getOffset, append, addClass, removeClass, hasClass, after, createElement } from './utility';
+import ResizeObserver from 'resize-observer-polyfill';
+import { getOffset, append, addClass, removeClass, hasClass } from './utility';
 
 type Option = {
   foldMenuClass: string;
@@ -57,7 +58,6 @@ export default class FoldMenu {
     let lastIndex = childElements.length;
    
     while (getOffset(foldMenu).left + foldMenu.offsetWidth > getOffset(this.selector).left + parentWidth) {
-      console.log()
       const lastElement = childElements[lastIndex - 1] as HTMLElement;
       if (lastElement && !hasClass(lastElement, foldMenuClass)) {
         lastElement.style.display = 'none';
@@ -110,7 +110,7 @@ export default class FoldMenu {
   }
 
   appendMenu() {
-    const { foldMenuClass, foldMenuToggleClass, foldMenuListClass, foldMenuText, addToggleBtn } = this.option;
+    const { foldMenuClass, foldMenuToggleClass, foldMenuListClass, foldMenuText } = this.option;
     append(this.selector, `<li class="${foldMenuClass}">
       <a href="#" class="${foldMenuToggleClass}">${foldMenuText}</a>
       <ul class="${foldMenuListClass}"></ul>
