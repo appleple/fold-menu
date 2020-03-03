@@ -51,24 +51,18 @@ export default class FoldMenu {
     [].forEach.call(childElements, (element: HTMLElement) => {
       element.style.display = '';
     });
-    let lastIndex = 0;
-    [].forEach.call(childElements, (element: HTMLElement, index) => {
-      if (getOffset(element).left + element.offsetWidth > parentWidth && !hasClass(element, foldMenuClass)) {
-        element.style.display = 'none';
-        this.foldMenuList.push(element);
-        lastIndex = index;
-      }
-    });
+
+    let lastIndex = childElements.length;
    
-    // while (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth) {
-    //   const lastElement = childElements[lastIndex - 1] as HTMLElement;
-    //   console.log(lastElement);
-    //   if (lastElement) {
-    //     lastElement.style.display = 'none';
-    //     this.foldMenuList.push(lastElement);
-    //   }
-    //   lastIndex--;
-    // }
+    while (getOffset(foldMenu).left + foldMenu.offsetWidth > parentWidth) {
+      const lastElement = childElements[lastIndex - 1] as HTMLElement;
+      if (lastElement && !hasClass(lastElement, foldMenuClass)) {
+        lastElement.style.display = 'none';
+        this.foldMenuList.push(lastElement);
+      }
+      lastIndex--;
+    }
+    this.foldMenuList = this.foldMenuList.reverse();
 
     this.selector.style.overflow = '';
     if (!this.foldMenuList.length) {
