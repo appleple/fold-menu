@@ -58,12 +58,14 @@ export default class FoldMenu {
     let lastIndex = childElements.length;
    
     while (getOffset(foldMenu).left + foldMenu.offsetWidth > getOffset(this.selector).left + parentWidth) {
-      const lastElement = childElements[lastIndex - 1] as HTMLElement;
-      if (lastIndex === childElements.length) {
-        if (getOffset(this.selector).left + parentWidth > getOffset(lastElement).left + lastElement.offsetWidth) {
+
+      if (lastIndex === childElements.length && childElements[lastIndex - 2]) {
+        const beforeElement = childElements[lastIndex - 2] as HTMLElement;
+        if (getOffset(this.selector).left + parentWidth > getOffset(beforeElement).left + beforeElement.offsetWidth) {
           break;
         }
       }
+      const lastElement = childElements[lastIndex - 1] as HTMLElement;
       if (lastElement && !hasClass(lastElement, foldMenuClass)) {
         lastElement.style.display = 'none';
         this.foldMenuList.push(lastElement);
