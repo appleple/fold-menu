@@ -5,6 +5,7 @@ declare type Option = {
     foldMenuListActiveClass: string;
     foldMenuText: string;
     addToggleBtn: boolean;
+    offset: number;
 };
 export default class FoldMenu {
     selector: HTMLElement;

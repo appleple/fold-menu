@@ -8,6 +8,7 @@ type Option = {
   foldMenuListActiveClass: string;
   foldMenuText: string;
   addToggleBtn: boolean;
+  offset: number
 };
 
 const defaultOption = {
@@ -16,7 +17,8 @@ const defaultOption = {
   foldMenuListClass: 'js-fold-menu-list',
   foldMenuListActiveClass: 'js-fold-menu-list-active',
   foldMenuText: '...',
-  addToggleBtn: false
+  addToggleBtn: false,
+  offset: 0
 }
 
 export default class FoldMenu {
@@ -42,9 +44,9 @@ export default class FoldMenu {
     });
     resizeObserver.observe(this.selector);
   }
-  
+
   calc() {
-    const { foldMenuClass, foldMenuToggleClass, foldMenuText } = this.option;
+    const { foldMenuClass, foldMenuToggleClass, foldMenuText, offset } = this.option;
     const childElements = this.selector.children;
     const parentWidth = this.selector.offsetWidth;
     const foldMenu: HTMLElement = this.selector.querySelector(`.${foldMenuClass}`);
@@ -56,12 +58,12 @@ export default class FoldMenu {
     });
 
     let lastIndex = childElements.length;
-   
+
     while (getOffset(foldMenu).left + foldMenu.offsetWidth > getOffset(this.selector).left + parentWidth) {
 
       if (lastIndex === childElements.length && childElements[lastIndex - 2]) {
         const beforeElement = childElements[lastIndex - 2] as HTMLElement;
-        if (getOffset(this.selector).left + parentWidth > getOffset(beforeElement).left + beforeElement.offsetWidth) {
+        if (getOffset(this.selector).left + parentWidth > getOffset(beforeElement).left + beforeElement.offsetWidth + offset) {
           break;
         }
       }
