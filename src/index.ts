@@ -59,7 +59,7 @@ export default class FoldMenu {
 
     let lastIndex = childElements.length;
 
-    while (getOffset(foldMenu).left + foldMenu.offsetWidth > getOffset(this.selector).left + parentWidth) {
+    while (getOffset(foldMenu).left + foldMenu.offsetWidth + offset > getOffset(this.selector).left + parentWidth) {
 
       if (lastIndex === childElements.length && childElements[lastIndex - 2]) {
         const beforeElement = childElements[lastIndex - 2] as HTMLElement;
