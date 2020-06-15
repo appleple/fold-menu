@@ -60,11 +60,12 @@ export default class FoldMenu {
     let lastIndex = childElements.length;
 
     while (getOffset(foldMenu).left + foldMenu.offsetWidth + offset > getOffset(this.selector).left + parentWidth) {
-
+      if (lastIndex < 0) {
+        break;
+      }
       if (lastIndex === childElements.length && childElements[lastIndex - 2]) {
         const beforeElement = childElements[lastIndex - 2] as HTMLElement;
-        console.log(parentWidth);
-        if (getOffset(this.selector).left + parentWidth + offset > getOffset(beforeElement).left + beforeElement.offsetWidth) {
+        if (getOffset(this.selector).left + parentWidth > getOffset(beforeElement).left + beforeElement.offsetWidth) {
           break;
         }
       }
